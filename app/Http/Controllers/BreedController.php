@@ -15,10 +15,9 @@ class BreedController extends Controller
     public function index()
     {
         $listBreeds= Breed::all();
-        $data='abc';
 
         // dd($listBreeds[0]->name);
-        return view('cat.index', compact('listBreeds', 'data'));
+        return view('breed.index', compact('listBreeds'));
     }
 
     /**
@@ -28,7 +27,7 @@ class BreedController extends Controller
      */
     public function create()
     {
-        //
+        return view('breed.create');
     }
 
     /**
@@ -39,7 +38,13 @@ class BreedController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $data = $request->all();
+        $data = $request->only('name');
+        // $data = $request->except('_token');
+        $breed = Breed::create($data);
+        return redirect()->route('list-breed');
+
+
     }
 
     /**

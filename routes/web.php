@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('breeds', 'BreedController@index')->name('list-breed');
+Route::get('bred', 'BreedController@index')->name('list-breed');
 //Show form create Breed
 Route::get('breeds/create', 'BreedController@create')->name('form-create-breed');
 //Store breed

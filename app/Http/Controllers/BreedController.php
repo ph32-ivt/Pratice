@@ -41,6 +41,7 @@ class BreedController extends Controller
         // $data = $request->all();
         $data = $request->only('name');
         // $data = $request->except('_token');
+        dd($data);
         $breed = Breed::create($data);
         return redirect()->route('list-breed');
 

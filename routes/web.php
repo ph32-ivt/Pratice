@@ -26,3 +26,7 @@ Route::put('cats/{id}', 'CatController@update')->name('cats.update');
 Route::get('cats', 'CatController@index');
 Route::get('cats/create', 'CatController@create')->name('cat-form');
 Route::post('cats', 'CatController@store')->name('cat-store');
+//Show form create Breed
+Route::get('breeds/create', 'BreedController@create')->name('form-create-breed');
+//Store breed
+Route::post('breeds', 'BreedController@store')->name('store-breed');

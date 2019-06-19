@@ -63,6 +63,7 @@ class CatController extends Controller
         // $cat= Cat::create($data);
         $cat= Cat::create($data);
         dd('done');
+
     }
 
     /**
@@ -88,6 +89,7 @@ class CatController extends Controller
         $listBreedId= Breed::all();
         // dd($cat, $listBreedId);
         return view('cat.edit', compact('cat', 'listBreedId'));
+
     }
 
     /**
@@ -114,6 +116,7 @@ class CatController extends Controller
         return redirect()->route('list-breed');
 
         
+
     }
 
     /**

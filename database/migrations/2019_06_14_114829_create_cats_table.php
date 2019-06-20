@@ -19,6 +19,7 @@ class CreateCatsTable extends Migration
             $table->integer('age');
             $table->integer('breed_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

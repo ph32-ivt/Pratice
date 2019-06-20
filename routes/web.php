@@ -30,3 +30,5 @@ Route::post('cats', 'CatController@store')->name('cat-store');
 Route::get('breeds/create', 'BreedController@create')->name('form-create-breed');
 //Store breed
 Route::post('breeds', 'BreedController@store')->name('store-breed');
+//delete cat
+Route::get('cats/{id}/delete', 'CatController@destroy')->name('delete-cat');

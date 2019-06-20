@@ -15,29 +15,14 @@ class CatController extends Controller
      */
     public function index()
     {
-        $data =[ 
-                    [
-                        'name' => 'cat test5',
-                        'age' => 1,
-                        'breed_id' => 2,
-                        'created_at' => now(),
-                        'updated_at' => now()
-                    ],
-                    [
-                        'name' => 'cat test6',
-                        'age' => 15,
-                        'breed_id' => 5,
-                        'created_at' => now(),
-                        'updated_at' => now()
+        \DB::enableQueryLog();
+        $cat= Cat::onlyTrashed()->where('id', 1)->first();
+        // dd($cat);
+        $cat->restore();
+        // dd(\DB::getQueryLog());
 
-                    ],
-
-                ];
-
-        $data = $request->all(); //['_token' =>'sdsdfdss']
-        // $cat= Cat::create($data);
-        $cat= Cat::insert($data);
         dd('done');
+        // dd($cat);
     }
 
     /**
@@ -127,6 +112,11 @@ class CatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //cach 1
+        $cat= Cat::find($id);
+        $cat->delete();
+        //cach 2
+        // Cat::destroy($id);
+        dd('done');
     }
 }

@@ -16,7 +16,9 @@
 			@foreach( $listBreeds as $breed)
 				<tr>
 					<td>{{ $breed->id }}</td>
-					<td>{{ $breed->name }}</td>
+					<td>
+						<a href="{{route('list-cat-by-breed-id', $breed->id)}}" >{{ $breed->name }}</a>
+					</td>
 					<td>{{ $breed->created_at }}</td>
 					<td>{{ $breed->updated_at }}</td>
 				</tr>

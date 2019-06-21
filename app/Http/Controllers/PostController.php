@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
-use App\Breed;
-use App\Cat;
 
-class BreedController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +14,7 @@ class BreedController extends Controller
      */
     public function index()
     {
-        $listBreeds= Breed::all();
-
-        // dd($listBreeds[0]->name);
-        return view('breed.index', compact('listBreeds'));
+        //
     }
 
     /**
@@ -28,7 +24,7 @@ class BreedController extends Controller
      */
     public function create()
     {
-        return view('breed.create');
+        //
     }
 
     /**
@@ -39,23 +35,16 @@ class BreedController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = $request->all();
-        $data = $request->only('name');
-        // $data = $request->except('_token');
-        dd($data);
-        $breed = Breed::create($data);
-        return redirect()->route('list-breed');
-
-
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
         //
     }
@@ -63,10 +52,10 @@ class BreedController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
         //
     }
@@ -75,10 +64,10 @@ class BreedController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
         //
     }
@@ -86,27 +75,11 @@ class BreedController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
         //
     }
-
-    public function listCatByBreedId($id)
-    {
-        //c1
-        // $list1= Breed::find($id)->cats;
-       // c2
-        $list2= Cat::where('breed_id', $id)->get();
-        // c3 
-        $list3= Breed::with('cats')->where('id', $id)->first()->toArray();
-        // $list4 = $list3[0]->cats;
-        dd($list2, $list3);
-        return view('breed.list-all-cat', compact('list3'));
-    }
-
-
-
 }

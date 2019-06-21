@@ -32,3 +32,16 @@ Route::get('breeds/create', 'BreedController@create')->name('form-create-breed')
 Route::post('breeds', 'BreedController@store')->name('store-breed');
 //delete cat
 Route::get('cats/{id}/delete', 'CatController@destroy')->name('delete-cat');
+//get all cat of one breed
+Route::get('breeds/{id}/cats', 'BreedController@listCatByBreedId')->name('list-cat-by-breed-id');
+//list all post of one country
+Route::get('countries/{id}/posts', 'CountryController@listPostByCountryId')->name('list-all-post');
+
+
+
+
+
+
+
+
+

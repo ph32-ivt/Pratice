@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Country;
 use Illuminate\Http\Request;
-use App\Breed;
-use App\Cat;
 
-class BreedController extends Controller
+class CountryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +14,7 @@ class BreedController extends Controller
      */
     public function index()
     {
-        $listBreeds= Breed::all();
-
-        // dd($listBreeds[0]->name);
-        return view('breed.index', compact('listBreeds'));
+        //
     }
 
     /**
@@ -28,7 +24,7 @@ class BreedController extends Controller
      */
     public function create()
     {
-        return view('breed.create');
+        //
     }
 
     /**
@@ -39,23 +35,16 @@ class BreedController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = $request->all();
-        $data = $request->only('name');
-        // $data = $request->except('_token');
-        dd($data);
-        $breed = Breed::create($data);
-        return redirect()->route('list-breed');
-
-
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Country $country)
     {
         //
     }
@@ -63,10 +52,10 @@ class BreedController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Country $country)
     {
         //
     }
@@ -75,10 +64,10 @@ class BreedController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Country $country)
     {
         //
     }
@@ -86,27 +75,37 @@ class BreedController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Country $country)
     {
         //
     }
 
-    public function listCatByBreedId($id)
+    public function listPostByCountryId($id)
     {
         //c1
-        // $list1= Breed::find($id)->cats;
-       // c2
-        $list2= Cat::where('breed_id', $id)->get();
-        // c3 
-        $list3= Breed::with('cats')->where('id', $id)->first()->toArray();
-        // $list4 = $list3[0]->cats;
-        dd($list2, $list3);
-        return view('breed.list-all-cat', compact('list3'));
-    }
+        $posts = Country::find($id)->posts;
 
+        //c2
+        $country= Country::find($id);
+        if ($country)
+        {
+            $posts= $country->posts;
+        }
+
+        //c3
+        $country = Country::with([
+            'users' => function($query) {
+                return $query->where('name', 'abc'); // lấy user có tên abc thuộc country có id là $id
+        }, 
+            'posts' // lấy all posts của country có id là $id
+        ])->where('id', $id)->first();
+        dd($country, $country->users, $country->posts);
+        return view('country.list-post', compact('country'));
+
+    }
 
 
 }

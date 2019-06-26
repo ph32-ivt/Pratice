@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Cat;
 use App\Breed;
+use App\Http\Requests\CreateCatRequest;
 
 class CatController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('is.Admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,10 +20,11 @@ class CatController extends Controller
      */
     public function index()
     {
+        dd('list cat user');
         \DB::enableQueryLog();
         $cat= Cat::onlyTrashed()->where('id', 1)->first();
         // dd($cat);
-        $cat->restore();
+        // $cat->restore();
         // dd(\DB::getQueryLog());
 
         dd('done');
@@ -41,13 +47,13 @@ class CatController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCatRequest $request)
     {
         $data = $request->except('_token'); 
         $data = $request->only('name', 'age', 'breed_id');
         // $cat= Cat::create($data);
         $cat= Cat::create($data);
-        dd('done');
+        return redirect()->route('list-cat');
 
     }
 

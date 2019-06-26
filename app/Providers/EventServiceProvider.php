@@ -31,7 +31,7 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        Cat::observe(CatObserver::class);// khai báo event cho model Cat
+        // Cat::observe(CatObserver::class);// khai báo event cho model Cat
         // Breed::observe(BreedObserver::class);
     }
 }
